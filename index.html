@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VogueStore - Fashion E-Commerce</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="navbar-top">
+    <div class="logo">VogueStore <i class="fas fa-shopping-bag"></i></div>
+    <div class="search-bar">
+      <input type="text" id="search" placeholder="Search for brands, products, styles...">
+      <button id="search-btn"><i class="fas fa-search"></i></button>
+    </div>
+    <div class="nav-actions">
+      <div class="nav-item" id="account-btn">
+        <i class="far fa-user"></i>
+        <span>Account</span>
+      </div>
+      <div class="nav-item" id="wishlist-btn">
+        <i class="far fa-heart"></i>
+        <span>Wishlist</span>
+        <span class="badge" id="wishlist-count">0</span>
+      </div>
+      <div class="nav-item" id="cart-btn">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Cart</span>
+        <span class="badge" id="cart-count">0</span>
+      </div>
+    </div>
+  </div>
+  <nav class="navbar-bottom">
+    <div class="menu-toggle" id="mobile-menu">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="category-nav" id="category-nav">
+      <li><a href="#" class="active" data-category="all">All Products</a></li>
+      <li><a href="#" data-category="women">Women</a></li>
+      <li><a href="#" data-category="men">Men</a></li>
+      <li><a href="#" data-category="shoes">Shoes</a></li>
+      <li><a href="#" data-category="accessories">Accessories</a></li>
+      <li><a href="#" data-category="activewear">Activewear</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Discover Your Style</h1>
+    <p>Trendy Fashion • Premium Quality • Exclusive Deals</p>
+    <a href="#products" class="cta-button">Shop Now</a>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<main class="container">
+  <!-- Filters Sidebar -->
+  <aside class="filters-sidebar" id="filters-sidebar">
+    <div class="filter-header">
+      <h3><i class="fas fa-filter"></i> Filters</h3>
+      <button id="clear-filters">Clear All</button>
+    </div>
+    
+    <div class="filter-group">
+      <h4>Category</h4>
+      <label><input type="checkbox" name="category" value="women"> Women</label>
+      <label><input type="checkbox" name="category" value="men"> Men</label>
+      <label><input type="checkbox" name="category" value="shoes"> Shoes</label>
+      <label><input type="checkbox" name="category" value="accessories"> Accessories</label>
+      <label><input type="checkbox" name="category" value="activewear"> Activewear</label>
+    </div>
+
+    <div class="filter-group">
+      <h4>Price Range</h4>
+      <div class="price-inputs">
+        <input type="number" id="min-price" placeholder="Min" min="0">
+        <span>-</span>
+        <input type="number" id="max-price" placeholder="Max" min="0">
+      </div>
+      <input type="range" id="price-range" min="0" max="5000" value="5000">
+      <span class="price-label">Up to ₹<span id="price-value">5000</span></span>
+    </div>
+
+    <div class="filter-group">
+      <h4>Size</h4>
+      <div class="size-options">
+        <button class="size-btn" data-size="XS">XS</button>
+        <button class="size-btn" data-size="S">S</button>
+        <button class="size-btn" data-size="M">M</button>
+        <button class="size-btn" data-size="L">L</button>
+        <button class="size-btn" data-size="XL">XL</button>
+        <button class="size-btn" data-size="XXL">XXL</button>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <h4>Color</h4>
+      <div class="color-options">
+        <button class="color-btn" data-color="black" style="background: #000;"></button>
+        <button class="color-btn" data-color="white" style="background: #fff; border: 1px solid #ddd;"></button>
+        <button class="color-btn" data-color="red" style="background: #e94560;"></button>
+        <button class="color-btn" data-color="blue" style="background: #3498db;"></button>
+        <button class="color-btn" data-color="green" style="background: #2ecc71;"></button>
+        <button class="color-btn" data-color="pink" style="background: #ff6b9d;"></button>
+        <button class="color-btn" data-color="yellow" style="background: #f1c40f;"></button>
+        <button class="color-btn" data-color="brown" style="background: #8b4513;"></button>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <h4>Brand</h4>
+      <label><input type="checkbox" name="brand" value="VogueBasic"> VogueBasic</label>
+      <label><input type="checkbox" name="brand" value="StyleHub"> StyleHub</label>
+      <label><input type="checkbox" name="brand" value="UrbanChic"> UrbanChic</label>
+      <label><input type="checkbox" name="brand" value="EliteWear"> EliteWear</label>
+      <label><input type="checkbox" name="brand" value="TrendSetters"> TrendSetters</label>
+    </div>
+  </aside>
+
+  <!-- Products Section -->
+  <section class="products-section">
+    <div class="products-header">
+      <div class="results-info">
+        <span id="results-count">0</span> Products Found
+      </div>
+      <div class="sort-options">
+        <label>Sort by:</label>
+        <select id="sort-select">
+          <option value="featured">Featured</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="newest">Newest</option>
+          <option value="rating">Highest Rated</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="products-grid" id="products-grid">
+      <!-- Products will be rendered here -->
+    </div>
+
+    <div class="loading-skeleton" id="loading-skeleton">
+      <!-- Loading skeletons will be rendered here -->
+    </div>
+
+    <div class="no-results" id="no-results" style="display: none;">
+      <i class="fas fa-search"></i>
+      <h3>No products found</h3>
+      <p>Try adjusting your filters or search terms</p>
+    </div>
+  </section>
+</main>
+
+<!-- Cart Modal -->
+<div class="modal" id="cart-modal">
+  <div class="modal-content cart-content">
+    <div class="modal-header">
+      <h2><i class="fas fa-shopping-cart"></i> Shopping Cart</h2>
+      <button class="close-btn" id="close-cart">&times;</button>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <!-- Cart items will be rendered here -->
+    </div>
+    <div class="cart-empty" id="cart-empty">
+      <i class="fas fa-shopping-bag"></i>
+      <p>Your cart is empty</p>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total:</span>
+        <span id="cart-total">₹0</span>
+      </div>
+      <button class="checkout-btn" id="checkout-btn">Proceed to Checkout</button>
+    </div>
+  </div>
+</div>
+
+<!-- Wishlist Modal -->
+<div class="modal" id="wishlist-modal">
+  <div class="modal-content wishlist-content">
+    <div class="modal-header">
+      <h2><i class="fas fa-heart"></i> My Wishlist</h2>
+      <button class="close-btn" id="close-wishlist">&times;</button>
+    </div>
+    <div class="wishlist-items" id="wishlist-items">
+      <!-- Wishlist items will be rendered here -->
+    </div>
+    <div class="wishlist-empty" id="wishlist-empty">
+      <i class="far fa-heart"></i>
+      <p>Your wishlist is empty</p>
+    </div>
+  </div>
+</div>
+
+<!-- Account Modal -->
+<div class="modal" id="account-modal">
+  <div class="modal-content account-content">
+    <div class="modal-header">
+      <h2><i class="fas fa-user-circle"></i> My Account</h2>
+      <button class="close-btn" id="close-account">&times;</button>
+    </div>
+    <div class="account-options">
+      <button class="account-btn"><i class="fas fa-box"></i> My Orders</button>
+      <button class="account-btn"><i class="fas fa-heart"></i> Wishlist</button>
+      <button class="account-btn"><i class="fas fa-map-marker-alt"></i> Addresses</button>
+      <button class="account-btn"><i class="fas fa-credit-card"></i> Payment Methods</button>
+      <button class="account-btn"><i class="fas fa-cog"></i> Settings</button>
+      <button class="account-btn"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+    </div>
+  </div>
+</div>
+
+<!-- Quick View Modal -->
+<div class="modal" id="quick-view-modal">
+  <div class="modal-content quick-view-content">
+    <button class="close-btn" id="close-quick-view">&times;</button>
+    <div class="quick-view-grid" id="quick-view-grid">
+      <!-- Quick view content will be rendered here -->
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast">
+  <i class="fas fa-check-circle"></i>
+  <span id="toast-message">Item added to cart</span>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>About VogueStore</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Customer Service</h4>
+      <ul>
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">Shipping Info</a></li>
+        <li><a href="#">Track Order</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Make Money</h4>
+      <ul>
+        <li><a href="#">Sell on VogueStore</a></li>
+        <li><a href="#">Affiliate Program</a></li>
+        <li><a href="#">Advertise</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Connect With Us</h4>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2024 VogueStore. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
